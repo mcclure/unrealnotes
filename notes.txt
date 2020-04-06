@@ -1,0 +1,79 @@
+Unreal
+
+USceneComponent is the scene base component
+The Actor is the immediate actor parent
+The component is the thing
+
+Assigned RootComponent and OurRoot?
+
+Here’s a hierarchy: https://docs.unrealengine.com/latest/INT/API/Runtime/Engine/Components/UStaticMeshComponent/index.html
+Actor hierarchy
+https://docs.unrealengine.com/latest/INT/API/Runtime/Engine/GameFramework/AActor/index.html
+An actor component can be added to an actor.
+A scene component is an object that “acts like” a game object
+
+UObject is the base class for serialization and gc
+
+FAUT
+Future Unfolding
+
+Keep coming back to
+components https://docs.unrealengine.com/latest/INT/Programming/Tutorials/Components/1/index.html
+actor https://docs.unrealengine.com/latest/INT/API/Runtime/Engine/GameFramework/AActor/index.html
+c++ programming https://docs.unrealengine.com/latest/INT/Programming/Introduction/
+convert actor to a blueprint class https://docs.unrealengine.com/latest/INT/API/Runtime/Engine/Engine/AStaticMeshActor/index.html
+fromunity https://docs.unrealengine.com/latest/INT/GettingStarted/FromUnity/
+see 364 - 369 here — something magic is happening https://github.com/EpicGames/UnrealEngine/blob/dbced2dd59f9f5dfef1d7786fd67ad2970adf95f/Engine/Source/Runtime/Engine/Private/LevelActor.cpp#L364
+
+MODEL
+An *Object* is serializable data storage. 
+An *Actor* is a container.
+An *Actor Component* is a *Behavior* an actor has (a mixing)
+A *Scene Component* is an *object* an actor has.
+Actor : Object, Actor Component : Object, Scene Component : Actor Component.	
+BUT: What is a blueprint class relative to these things? Scene components have positions; do actors?
+
+Pawn, Controller, Character, Player Controller: These are four stock actors. If you use them, unreal can give you automatic multiplayer (and maybe AI?)
+
+Basic callbacks
+	Actor: BeginPlay(), EndPlay(), Tick()
+	Component: InitializeComponent(), UninitializeComponent(), TickComponent()
+Create (with optional template) (preserves: UPROPERTYs, components)
+	Object: NewObject
+	Actor: world.SpawnActor
+
+Actor has GetWorld() for world
+Component has GetOwner() for actor
+HOW?: Get Actor from ActorComponent?
+
+—
+Big questions:
+There are some organizational advantages to Actor v Root Component. What?
+Cast<>. Can it be anything or is this a benefit of Object? Is it more/less efficient than RTTI?
+What does UObject::GetClass return?
+Look up Find / Actor:: FindComponentByClass
+cursed magic for (TObjectIterator<UMyObject> It; It; ++it)
+GENERATED_BODY()? enum UMETA, UENUM max
+google multi pass rendering unreal https://www.youtube.com/watch?v=QGIKrD7uHu8
+plugin? https://forums.unrealengine.com/development-discussion/vr-ar-development/89050-vr-expansion-plugin
+vr: reflection probes/parallax mapping? https://docs.unrealengine.com/latest/INT/Platforms/VR/ContentSetup/
+Is there anything useful about modes?
+—
+spacemouse
+https://github.com/ParcelRot/SpaceNav3D
+mkdir Plugins && cd Plugins
+git clone git@github.com:ParcelRot/SpaceNav3D.git
+New C++ Class -> TempClass
+—
+What if I write a tutorial?
+Talk about source control (plastic) (“buiitdata” as argument)
+Talk about different kinds of relationship
+YOU NEED TO KNOW: inheritance. make a game in something but no coding needed
+explain stars
+world = map = level
+
+Blank map:
+- Create new map
+- Window->World Settings
+    - GameMode: EmptyGameMode, etc. Appears to share emptygamemode (investigate this)
+
